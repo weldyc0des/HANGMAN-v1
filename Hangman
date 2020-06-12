@@ -1,0 +1,96 @@
+# Write your code here
+import random
+print("H A N G M A N")
+haha = input('Type "play" to play the game, "exit" to quit: ')
+if haha.lower() == "play":
+    print()
+
+    wordlist = ['python', 'java', 'kotlin', 'javascript']
+    word = random.choice(wordlist)
+
+    print("-" * len(word))
+    solved = set()
+    tries = 0
+    wrongs = set()
+    while tries < 8 and solved != set(word):
+        censored = ""
+        guess = input("Input a letter: ")
+        if len(guess) ==1:
+            if guess.islower():
+                if guess in word:
+                    if guess not in solved:
+                        for letter in word:
+                            if guess == letter or letter in solved:
+                                solved.add(guess)
+                                censored += letter
+                            else:
+                                censored += "-"
+                        print()
+                        print(censored)
+                    else:
+                        print("You already typed this letter")
+
+                        for letter in word:
+                            if letter in solved:
+                                censored += letter
+                            else:
+                                censored += "-"
+
+                        if tries < 8 and solved != set(word):
+                            print()
+                            print(censored)
+                else:
+                    if guess not in wrongs:
+                        print("No such letter in the word")
+                        tries += 1
+                        wrongs.add(guess)
+                        for letter in word:
+                            if letter in solved:
+                                censored += letter
+                            else:
+                                censored += "-"
+                        if tries < 8 and solved != set(word):
+                            print()
+                            print(censored)
+                    else:
+                        print("You already typed this letter")
+
+                        for letter in word:
+                            if letter in solved:
+                                censored += letter
+                            else:
+                                censored += "-"
+
+                        if tries < 8 and solved != set(word):
+                            print()
+                            print(censored)
+
+            else:
+                print("It is not an ASCII lowercase letter")
+                for letter in word:
+                    if letter in solved:
+                        censored += letter
+                    else:
+                        censored += "-"
+                if tries < 8 and solved != set(word):
+                    print()
+                    print(censored)
+        else:
+            print("You should input a single letter")
+            for letter in word:
+                if letter in solved:
+                    censored += letter
+                else:
+                    censored += "-"
+            if tries < 8 and solved != set(word):
+                print()
+                print(censored)
+
+    else:
+        if solved == set(word):
+            print("You guessed the word!")
+            print("You survived!")
+        else:
+            print("You are hanged!")
+elif haha.lower() == "exit":
+    pass
